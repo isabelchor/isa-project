@@ -1,0 +1,58 @@
+﻿@page "/"
+@using ModelClass
+@using DB
+@inject IJSRuntime js
+
+
+<span class="h1">Artists</span>
+
+
+@if (list == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table style="border-style:dotted">
+        <thead>
+            <tr class="table-warning">
+                <th scope ="col">Artist Name</th>
+                <th scope="col">Artist birthday</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (artist item in list)
+            {
+                <tr>
+                    <td><a class="" href="customerDetails/@item.artistID.ToString()"> @item.Name</a></td>
+                    <td>@item.Birthday</td>
+                    <td>
+                        <a class="btn btn-success" href="artistEdit/@item.artistID.ToString()">Edit</a>
+                        <button class="btn btn-danger" @onclick="@(() => Delete(@item.artistID))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<artist> list;
+    protected override void OnInitialized()
+    {
+        ArtisiDB ArtisiDB = new ArtisiDB();
+        list = (List<artist>)ArtisiDB.SelectAll();
+    }
+    async Task Delete(int id)
+    {
+        ArtisiDB ArtisiDB = new ArtisiDB();
+        artist artist = (artist)ArtisiDB.GetRowByPK(id);
+        if (await js.InvokeAsync<bool>("confirm", $"Do you want to delete {artist.Name}'s Record?"))
+        {
+            ArtisiDB.Delete(artist);
+            OnInitialized();
+        }
+    }
+}
+

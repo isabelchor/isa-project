@@ -1,0 +1,53 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Blazor
+build_property.RootNamespace = Blazor
+build_property.ProjectDir = C:\Users\qkwei\source\repos\MyProject-isa\Blazor\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\qkwei\source\repos\MyProject-isa\Blazor
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/EditPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFBhc3N3b3JkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/ListOfArtists.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdE9mQXJ0aXN0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/Registresion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cmVzaW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/UpdateArtist.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBkYXRlQXJ0aXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

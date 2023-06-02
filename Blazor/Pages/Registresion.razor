@@ -1,0 +1,52 @@
+﻿@page "/registration"
+@inject NavigationManager uriHelper
+@using ModelClass
+@using DB
+<div class="form-signin text-center w-50 m-2">
+    <span class="h2 mb-3 font-weight-normal">Registration form</span><br />
+    <label for="inputName" class="sr-only">Name</label>
+    <input @bind-value="Name" type="text" id="inputEmail" class="form-control m-1" placeholder="Name" required autofocus>
+    <label for="inputBirthday" class="sr-only">birthday</label>
+    <input @bind-value="Birthday" type="text" id="inputBirthday" class="form-control m-1" placeholder="birthday" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input @bind-value="Password1" type="password" id="inputPassword" class="form-control m-1" placeholder="Password" required>
+    <input @bind-value="Password2" type="password" id="inputPassword" class="form-control m-1" placeholder="reenter password" required>
+    <button @onclick="registrationBtn" class="btn btn-lg btn-primary btn-block m-1" type="submit">Sign in</button>
+    <div class="mt-5 mb-3 text-muted">@s</div>
+</div>
+
+@code {
+    private string Name = "";
+    private string Birthday = "";
+    private string Password1 = "";
+    private string Password2 = "";
+    private string s = "";
+
+    async Task registrationBtn()
+    {
+        ArtisiDB ArtisiDB = new ArtisiDB();
+        artist Artist = new artist();
+        Artist.Name = Name;
+        Artist.Birthday = Birthday;
+
+        if (Password1 == Password2 && Password1 != "" && Name != "" && Birthday != "")
+        {
+            Artist.Password = Password1;
+            Artist = (artist)await ArtisiDB.Insert(Artist);
+            if (Artist.artistID != 0)
+            {
+                s = "welcome " + Artist.Name;
+                await Task.Delay(3000);
+                uriHelper.NavigateTo("/");
+            }
+            else
+            {
+                s = "Registration failed: database error";
+            }
+        }
+        else
+        {
+            s = "Registration failed: form error";
+        }
+    }
+}
