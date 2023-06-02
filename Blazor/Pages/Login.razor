@@ -1,17 +1,11 @@
 ﻿@page "/login"
-inject IJSRuntime js
+@inject IJSRuntime js
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage MySession
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
 @using ModelClass
 @using DB
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-             <a class="nav-item nav-link active" href="login">Login</a>
-        </div>
-    </div>
-</nav>
+
 
 
 <div class="form-signin text-center w-50 m-2">
@@ -32,17 +26,30 @@ inject IJSRuntime js
     private string Birthday = "";
     private string Password = "";
     private string s = "";
+    private artist at;
 
 
+    List<artist> list;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var artistSession = await MySession.GetAsync<artist>("artistSession");
+        if (artistSession.Success)
+        {
+            navigationManager.NavigateTo($"/details/{((artist)(artistSession.Value)).artistID}");
+        }
+        else
+            navigationManager.NavigateTo("login");
 
+    }
 
     private async Task CheckLogin()
     {
-
-        if (Name == "admin" && Password == "pass")
+        ArtisiDB cdb = new ArtisiDB();
+        at = await cdb.login(Name, Password);
+        if (at != null && at.artistID != 0)
         {
-            await MySession.SetAsync("adminSession", Name);
-            navigationManager.NavigateTo("/");
+            await MySession.SetAsync("artistSession", at);
+            navigationManager.NavigateTo($"/details/{at.artistID}");
         }
         else
         {
@@ -50,5 +57,5 @@ inject IJSRuntime js
         }
 
     }
-    }
+}
 

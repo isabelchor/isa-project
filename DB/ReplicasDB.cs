@@ -27,11 +27,9 @@ namespace DB
         {
             replicas c = new replicas();
             c.replicaID = int.Parse(row[0].ToString());
-            c.nameartist = row[1].ToString();
-            c.namedrawing = row[2].ToString();
-            c.location = row[3].ToString();
-            c.drawingID =(drawing)row[4];
-            c.artist = (artist)row[5];
+            c.location = row[1].ToString();
+            c.drawingID =int.Parse(row[2].ToString());
+            c.artistID = int.Parse(row[3].ToString());
             
             return c;
 
@@ -60,16 +58,13 @@ namespace DB
         }
         protected override async Task<replicas> CreateModelAsync(object[] row)
         {
-            replicas o = new replicas();
-            o.replicaID = int.Parse(row[0].ToString());
-            o.nameartist = row[1].ToString();
-            o.namedrawing = row[2].ToString();
-            int drawingID = int.Parse(row[3].ToString());
-            drawing a = new drawing();
-            DrawingDB drawingDB = new DrawingDB();
-            a = await drawingDB.SelectByPkAsync(drawingID);
-            o.drawingID = a;
-            return o;
+            replicas c = new replicas();
+            c.replicaID = int.Parse(row[0].ToString());
+            c.location = row[1].ToString();
+            c.drawingID = int.Parse(row[2].ToString());
+            c.artistID = int.Parse(row[3].ToString());
+
+            return c;
 
         }
         public override replicas GetRowByPK(object pk)

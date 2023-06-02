@@ -11,7 +11,6 @@ namespace ModelClass
         public int TypeID { get; set; }
         public string date { get; set; }
         public string namedrawing { get; set; }
-        public string name { get; set; }
         public int cost { get; set; }
         public string technique { get; set; }
         public int artistID { get; set; }
@@ -21,7 +20,6 @@ namespace ModelClass
             this.TypeID = type;
             this.date = date;
             this.namedrawing = namedrawing;
-            this.name = name;
             this.cost = cost;
             this.technique = technique;
             this.artistID = artist;

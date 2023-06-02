@@ -83,7 +83,7 @@ namespace DB
         {
             Dictionary<string, string> d = new Dictionary<string, string>(){
                             {"name",at.Name},
-                            {"Birthday",at.Birthday} };
+                            {"birthday",at.Birthday} };
             base.Insert(d);
         }
         public int Update(artist at)
@@ -91,7 +91,7 @@ namespace DB
             Dictionary<string, string> d = new Dictionary<string, string>(){
                             {"artistID",at.artistID.ToString()},
                             {"name",at.Name},
-                            {"Birthday",at.Birthday} };
+                            {"birthday",at.Birthday} };
             Dictionary<string, string> d2 = new Dictionary<string, string>()
             {
                 {"artistID",at.artistID.ToString()} };
@@ -102,8 +102,8 @@ namespace DB
         {
             Dictionary<string, string> fillValues = new Dictionary<string, string>();
             Dictionary<string, string> filterValues = new Dictionary<string, string>();
-            fillValues.Add("Name", a.Name);
-            fillValues.Add("Birthday", a.Birthday);
+            fillValues.Add("name", a.Name);
+            fillValues.Add("birthday", a.Birthday);
             filterValues.Add("artistID", a.artistID.ToString());
             return await base.UpdateAsync(fillValues, filterValues);
         }
@@ -117,37 +117,50 @@ namespace DB
         {
             Dictionary<string, string> filterValues = new Dictionary<string, string>
             {
-                { "CustomerID", a.artistID.ToString() }
+                { "artistID", a.artistID.ToString() }
             };
             return await base.DeleteAsync(filterValues);
         }
-        public int updatePassword(artist a, string password)
+        public int UpdatePassword(artist a, string password)
         {
             Dictionary<string, string> fillValues = new Dictionary<string, string>();
             Dictionary<string, string> filterValues = new Dictionary<string, string>();
-            fillValues.Add("Name", a.Name);
-            fillValues.Add("Birthday", a.Birthday);
-            fillValues.Add("ArtistPassword", password);
-            filterValues.Add("ArtistID", a.artistID.ToString());
+            fillValues.Add("name", a.Name);
+            fillValues.Add("birthday", a.Birthday);
+            fillValues.Add("password", password);
+            filterValues.Add("artistID", a.artistID.ToString());
             return base.Update(fillValues, filterValues);
         }
-        public async Task<int> updatePasswordAsync(artist a, string password)
+        public async Task<int> UpdatePasswordAsync(artist a, string password)
         {
             Dictionary<string, string> fillValues = new Dictionary<string, string>();
             Dictionary<string, string> filterValues = new Dictionary<string, string>();
-            fillValues.Add("Name", a.Name);
-            fillValues.Add("Birthday", a.Birthday);
-            fillValues.Add("CustomerPassword", password);
-            filterValues.Add("CustomerID", a.artistID.ToString());
+            fillValues.Add("name", a.Name);
+            fillValues.Add("birthday", a.Birthday);
+            fillValues.Add("password", password);
+            filterValues.Add("artistID", a.artistID.ToString());
             return await base.UpdateAsync(fillValues, filterValues);
         }
-      
-       
-        /// <summary>
-        /// insert new records in a table using INSERT Statement.
-        /// </summary>
-        /// <param name="keyAndValue">Dictionary (Key & Value)</param>
-        /// <returns>An object that includes the ID attribute from the database.</returns>
+
+        // specific queries
+        public async Task<string> GetPasswordAsync(int id)
+        {
+            string sql = @"SELECT artist.password FROM artist WHERE
+			 	(artistID  = @id)";
+            AddParameterToCommand("@id", id);
+            string oldPassword = (string)await ExecScalarAsync(sql);
+            return oldPassword;
+        }
+
+        public string GetPassword(int id)
+        {
+            string sql = @"SELECT artist.password FROM artist WHERE
+			 	(artistID  = @id)";
+            AddParameterToCommand("@id", id);
+            string oldPassword = (string)ExecScalar(sql);
+            return oldPassword;
+        }
+
         public object InsertGetObj(Dictionary<string, string> keyAndValue)
         {
             string sqlCommand = PrepareInsertQueryWithParameters(keyAndValue);
@@ -166,11 +179,11 @@ namespace DB
         {
             Dictionary<string, string> fillValues = new Dictionary<string, string>()
             {
-                { "Name", a.Name },
-                { "Email", a.Birthday },
-                { "CustomerPassword", password }
+                { "name", a.Name },
+                { "birthday", a.Birthday },
+                { "password", password }
             };
-            return (artist)await base.InsertGetObjAsync(fillValues);
+            return await base.InsertGetObjAsync(fillValues) as artist;
         }
         /// <summary>
         /// Prepare Insert Query With Parameters
@@ -212,7 +225,32 @@ namespace DB
             else
                 return null;
         }
+        public async Task<artist> login(string artistName, string password)
+        {
+            artist c = (artist)await GetRowByUKAsync(artistName);
+            string sql = "";
+            if (c != null)
+                sql = @$"SELECT * FROM artist
+                                WHERE artistID='{c.artistID}' AND password = '{password}';";
+            List<artist> res = (List<artist>)SelectAll(sql);
+            if (res.Count == 1)
+            {
+                return c;
+            }
+            else
+                return null;
+        }
+        protected async Task<artist> GetRowByUKAsync(string uk)
+        {
+            string sql = @"SELECT * FROM artist WHERE
+			 	(name = @name)";
+            cmd.Parameters.AddWithValue("@name", uk.ToString());
+            List<artist> list = (List<artist>)SelectAll(sql);
+            if (list.Count == 1)
+                return list[0];
+            else
+                return null;
+        }
 
-     
     }
 }

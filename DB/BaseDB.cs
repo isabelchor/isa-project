@@ -20,6 +20,32 @@ namespace DB
         protected abstract Task<T> CreateModelAsync(object[] row);
         protected abstract List<T> CreateListModel(List<object[]> rows);
         protected abstract Task<List<T>> CreateListModelAsync(List<object[]> rows);
+        protected async Task<object> InsertGetObjAsync(Dictionary<string, string> keyAndValue)
+        {
+            string sqlCommand = PrepareInsertQueryWithParameters(keyAndValue);
+            sqlCommand += $" SELECT LAST_INSERT_ID();";
+            object res = await ExecScalarAsync(sqlCommand);
+            if (res != null)
+            {
+                return GetRowByPK(res);
+            }
+            else
+                return null;
+        }
+        protected object InsertGetObj(Dictionary<string, string> keyAndValue)
+        {
+            string sqlCommand = PrepareInsertQueryWithParameters(keyAndValue);
+            if (sqlCommand != "")
+            {
+                sqlCommand += $" SELECT LAST_INSERT_ID();";
+                object res = ExecScalar(sqlCommand);
+                if (res != null)
+                {
+                    return GetRowByPK(res);
+                }
+            }
+            return null;
+        }
         public object SelectAll()
         {
             List<object[]> list = (List<object[]>)StingListSelectAll("", new Dictionary<string, string>());
@@ -195,16 +221,7 @@ namespace DB
             query += where;
             return exeNONquery(query);
         }
-        /// <summary>
-        /// TESTED Executes the query, and returns the first column of the first row in the result
-        /// </summary>
-        /// <param name="query">SQL string</param>
-        /// <returns>The first column of the first row in the result set, or a null.</returns>
-        ///  /// <summary>
-        /// Prepare command and Connection before executing SQL command
-        /// </summary>
-        /// <example>DELETE FROM Customers WHERE CustomerID = 17</example>
-        /// <param name="query">SQL query string</param>
+
         private void PreQuery(string query)
         {
             cmd.CommandText = query;
@@ -214,9 +231,7 @@ namespace DB
                 cmd.Connection = DB.conn;
         }
 
-        /// <summary>
-        /// Make cleanup after sql command was executed
-        /// </summary>
+
         private void PostQuery()
         {
             if (reader != null && !reader.IsClosed)
@@ -247,11 +262,7 @@ namespace DB
             }
             return obj;
         }
-        /// <summary>
-        /// Add one parameters to Transact-SQL statement.
-        /// </summary>
-        /// <param name="name">Parameter name example:@id</param>
-        /// <param name="value">Parameter value</param>
+
         protected void AddParameterToCommand(string name, object value)
         {
             DbParameter p = cmd.CreateParameter();
@@ -259,57 +270,32 @@ namespace DB
             p.Value = value;
             cmd.Parameters.Add(p);
         }
-        /// <summary>
-        /// asynchronous version of SelectAll
-        /// A generic operation to retrieve ALL data from the database.
-        /// </summary>
-        /// <returns>List of Objects</returns>
+    
         public async Task<List<T>> SelectAllAsync()
         { 
             return await SelectAllAsync("", new Dictionary<string, string>());
         }
 
-        /// <summary>
-        /// asynchronous version of SelectAll
-        /// A generic operation to retrieve data from the database.
-        /// </summary>
-        /// <param name="parameters">Dictionary (Key & Value)</param>
-        /// <returns>List of Objects</returns>
+
         public async Task<List<T>> SelectAllAsync(Dictionary<string, string> parameters)
         {
             return await SelectAllAsync("", parameters);
         }
 
-        /// <summary>
-        /// asynchronous version of SelectAll
-        /// A generic operation to retrieve data from the database.
-        /// </summary>
-        /// <param name="query">SQL string</param>
-        /// <returns>List of Objects</returns>
+
         public async Task<List<T>> SelectAllAsync(string query)
         {
             return await SelectAllAsync(query, new Dictionary<string, string>());
         }
 
-        /// <summary>
-        /// asynchronous version of SelectAll
-        /// A generic operation to retrieve data from the database.
-        /// </summary>
-        /// <param name="query">SQL string</param>
-        /// <param name="parameters">Dictionary (Key & Value)</param>
-        /// <returns>List of Objects</returns>
+
         public async Task<List<T>> SelectAllAsync(string query, Dictionary<string, string> parameters)
         {
             List<object[]> list = await StingListSelectAllAsync(query, parameters);
             return CreateListModel(list);
         }
 
-        /// <summary>
-        /// asynchronous version of ExecNonQuery
-        /// </summary>
-        /// <param name="query">SQL string</param>
-        /// <example>DELETE FROM Customers WHERE CustomerID = 17</example>
-        /// <returns>The number of rows affected.</returns>
+
         protected async Task<int> ExecNonQueryAsync(string query)
         {
             if (String.IsNullOrEmpty(query))
@@ -331,12 +317,7 @@ namespace DB
             return rowsEffected;
         }
 
-        /// <summary>
-        /// TESTED asynchronous version of ExecScalar
-        /// Executes the query, and returns the first column of the first row in the result
-        /// </summary>
-        /// <param name="query">SQL string</param>
-        /// <returns>The first column of the first row in the result set, or a null.</returns>
+
         protected async Task<object> ExecScalarAsync(string query)
         {
             if (String.IsNullOrEmpty(query))
@@ -370,29 +351,7 @@ namespace DB
             return await ExecNonQueryAsync(sqlCommand);
         }
 
-        /// <summary>
-        /// asynchronous version of InsertGetObj
-        /// insert new records in a table using INSERT Statement.
-        /// </summary>
-        /// <param name="keyAndValue">Dictionary (Key & Value)</param>
-        /// <returns>An object that includes the ID attribute from the database.</returns>
-        protected async Task<object> InsertGetObjAsync(Dictionary<string, string> keyAndValue)
-        {
-            string sqlCommand = PrepareInsertQueryWithParameters(keyAndValue);
-            sqlCommand += $" SELECT LAST_INSERT_ID();";
-            object res = await ExecScalarAsync(sqlCommand);
-            if (res != null)
-            {
-                return GetRowByPK(res);
-            }
-            else
-                return null;
-        }
-        /// <summary>
-        /// Prepare Update Query With Parameters
-        /// </summary>
-        /// <param name="fields">Dictionary (Key & Value)</param>
-        /// <returns>String of SQL</returns>
+
         private string PrepareUpdateQueryWithParameters(Dictionary<string, string> fields)
         {
             string InValue = "";
@@ -408,13 +367,7 @@ namespace DB
             }
             return InValue;
         }
-        /// <summary>
-        /// asynchronous version of Update
-        /// Update records in a table using SQL UPDATE Statement.
-        /// </summary>
-        /// <param name="FildValue">Dictionary (Key & Value)</param>
-        /// <param name="parameters">Dictionary (Key & Value)</param>
-        /// <returns>The number of rows affected.</returns>
+
         protected async Task<int> UpdateAsync(Dictionary<string, string> FildValue, Dictionary<string, string> parameters)
         {
             string where = PrepareWhereQueryWithParameters(parameters);
@@ -426,12 +379,7 @@ namespace DB
             string sqlCommand = $"UPDATE {GetTableName()} SET {InKeyValue}  {where}";
             return await ExecNonQueryAsync(sqlCommand);
         }
-        /// <summary>
-        /// Prepare SQL Where closure from the given paremeters dictionary
-        /// </summary>
-        /// <param name="parameters">Dictionary (Key & Value)</param>
-        /// <example>Where p1=v1 AND p2=v2</example>
-        /// <returns>String of SQL Where closure</returns>
+
         private string PrepareWhereQueryWithParameters(Dictionary<string, string> parameters)
         {
             string where = "WHERE ";
@@ -452,12 +400,6 @@ namespace DB
             return where;
         }
 
-        /// <summary>
-        /// asynchronous version of Delete
-        /// Delete records in a table using SQL DELETE Statement.
-        /// </summary>
-        /// <param name="parameters">Dictionary (Key & Value)</param>
-        /// <returns>The number of rows affected.</returns>
         protected async Task<int> DeleteAsync(Dictionary<string, string> parameters)
         {
             string where = PrepareWhereQueryWithParameters(parameters);
@@ -466,11 +408,7 @@ namespace DB
             return await ExecNonQueryAsync(sqlCommand);
         }
        
-        /// <summary>
-        /// Prepare Insert Query With Parameters
-        /// </summary>
-        /// <param name="fields">Dictionary (Key & Value)</param>
-        /// <returns>String of SQL</returns>
+
         private string PrepareInsertQueryWithParameters(Dictionary<string, string> fields)
         {
             if (fields == null || fields.Count == 0)

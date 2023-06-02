@@ -32,7 +32,7 @@
         if (Password1 == Password2 && Password1 != "" && Name != "" && Birthday != "")
         {
             Artist.Password = Password1;
-            Artist = (artist)await ArtisiDB.Insert(Artist);
+            Artist = (artist)await ArtisiDB.InsertGetObjAsync(Artist, Password1);
             if (Artist.artistID != 0)
             {
                 s = "welcome " + Artist.Name;

@@ -1,0 +1,51 @@
+﻿@page "/details/{Id:int}"
+@inject IJSRuntime js
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage MySession
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@using ModelClass
+@using DB
+@if (dlist != null)
+{
+    <table class="table w-50">
+        <thead>
+            <tr>
+                <th>Ring Description</th>
+                <th>Ring Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (drawing item in dlist)
+            {
+                <tr>
+                    <td>@adb.GetRowByPK(@item.artistID).Name</td>
+                    <td>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+        @code {
+        [Parameter] public int id { get; set; }
+        List<drawing> dlist;
+        ArtisiDB adb = new ArtisiDB();
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var artistSession = await MySession.GetAsync<artist>("artistSession");
+        if (!artistSession.Success)
+        {
+            navigationManager.NavigateTo("login");
+        }
+
+        DrawingDB ddb = new DrawingDB();
+        List<drawing> dlist = ddb.SelectAll($"SELECT * from drawing where artistID = {id}") as List<drawing>;
+
+    }
+}

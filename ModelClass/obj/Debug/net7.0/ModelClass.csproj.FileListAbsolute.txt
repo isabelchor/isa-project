@@ -10,3 +10,15 @@ C:\Users\CSS\source\repos\ModelClass\obj\Debug\net7.0\ModelClass.dll
 C:\Users\CSS\source\repos\ModelClass\obj\Debug\net7.0\refint\ModelClass.dll
 C:\Users\CSS\source\repos\ModelClass\obj\Debug\net7.0\ModelClass.pdb
 C:\Users\CSS\source\repos\ModelClass\obj\Debug\net7.0\ref\ModelClass.dll
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\bin\Debug\net7.0\ModelClass.deps.json
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\bin\Debug\net7.0\ModelClass.dll
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\bin\Debug\net7.0\ModelClass.pdb
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.csproj.AssemblyReference.cache
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.AssemblyInfoInputs.cache
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.AssemblyInfo.cs
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.csproj.CoreCompileInputs.cache
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.dll
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\refint\ModelClass.dll
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.pdb
+C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ref\ModelClass.dll
