@@ -10,17 +10,26 @@
     <table class="table w-50">
         <thead>
             <tr>
-                <th>Ring Description</th>
-                <th>Ring Price</th>
+                <th>Drawing Name</th>
+                <th>Date Published</th>
+                <th>Technique</th>
+                <th>Cost</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
             @foreach (drawing item in dlist)
             {
                 <tr>
-                    <td>@adb.GetRowByPK(@item.artistID).Name</td>
                     <td>
-                        <button class="btn btn-danger">Delete</button>
+                        <a class ="" href="/replicas/@item.drawingID">@item.namedrawing</a>
+                    </td>
+                    <td>@item.date</td>
+                    <td>@item.technique</td>
+                    <td>@item.cost</td>
+                    <td>@tdb.GetRowByPKAsync(item.TypeID).Result.types</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="@(() => Delete(@item.drawingID))">Delete</button>
                     </td>
                 </tr>
             }
@@ -32,11 +41,12 @@ else
     <p>Loading...</p>
 }
 
-        @code {
-        [Parameter] public int id { get; set; }
-        List<drawing> dlist;
-        ArtisiDB adb = new ArtisiDB();
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+@code {
+    [Parameter] public int id { get; set; }
+    List<drawing> dlist;
+    ArtisiDB adb = new ArtisiDB();
+    TypeDB tdb = new TypeDB();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         var artistSession = await MySession.GetAsync<artist>("artistSession");
         if (!artistSession.Success)
@@ -45,7 +55,22 @@ else
         }
 
         DrawingDB ddb = new DrawingDB();
-        List<drawing> dlist = ddb.SelectAll($"SELECT * from drawing where artistID = {id}") as List<drawing>;
+        dlist = (List<drawing>)(ddb.SelectAll($"SELECT * from drawing where artistID = {id}"));
+        StateHasChanged();
+    }
 
+    async Task Delete(int id)
+    {
+        DrawingDB ddb = new DrawingDB();
+        drawing d = ddb.SelectByPkAsync(id).Result;
+        ReplicasDB rdb = new ReplicasDB();
+        List<replicas> rlist = (List<replicas> )rdb.SelectAll($"SELECT * FROM replicas WHERE drawingID = {id}");
+        if (await js.InvokeAsync<bool>("confirm"))
+        {
+            foreach (replicas item in rlist)
+                rdb.Delete(item);
+            ddb.Delete(d);
+            StateHasChanged(); 
+        }
     }
 }

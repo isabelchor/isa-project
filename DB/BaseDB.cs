@@ -15,7 +15,7 @@ namespace DB
     {
         protected abstract string GetTableName();
         public abstract T GetRowByPK(object pk);
-        protected abstract Task<T> GetRowByPKAsync(object pk);
+        public abstract Task<T> GetRowByPKAsync(object pk);
         protected abstract T CreateModel(object[] row);
         protected abstract Task<T> CreateModelAsync(object[] row);
         protected abstract List<T> CreateListModel(List<object[]> rows);

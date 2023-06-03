@@ -42,7 +42,7 @@ namespace DB
             }
             return custList;
         }
-        protected override async Task<artist> GetRowByPKAsync(object pk)
+        public override async Task<artist> GetRowByPKAsync(object pk)
         {
             string sql = @"SELECT artist.* FROM artist WHERE
 			 	(artistID = @id)";

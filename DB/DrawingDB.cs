@@ -36,7 +36,7 @@ namespace DB
             }
             return orderList;
         }
-        protected override async Task<drawing> GetRowByPKAsync(object pk)
+        public override async Task<drawing> GetRowByPKAsync(object pk)
         {
             string sql = @"SELECT drawing.* FROM drawing WHERE (drawingID = @id)";
             AddParameterToCommand("@id", int.Parse(pk.ToString()));
@@ -110,12 +110,10 @@ namespace DB
 
             base.Update(d, d2);
         }
-        public void Delete(artist at)
+        public void Delete(drawing dr)
         {
             Dictionary<string, string> d = new Dictionary<string, string>(){
-                            { "artistID",at.artistID.ToString()},
-                            { "name",at.Name},
-                            { "birthday",at.Birthday}};
+                            { "drawingID", dr.drawingID.ToString()} };
             base.Delete(d);
         }
         public async Task<drawing> SelectByPkAsync(int id)

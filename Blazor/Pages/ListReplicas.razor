@@ -1,0 +1,63 @@
+﻿@page "/replicas/{Id:int}"
+@inject IJSRuntime js
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage MySession
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@using ModelClass
+@using DB
+@if (rlist != null)
+{
+    <table class="table w-50">
+        <thead>
+            <tr>
+                <th>location</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (replicas item in rlist)
+            {
+                <tr>
+                    <td>@item.location</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="@(() => Delete(@item.replicaID))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    [Parameter] public int id { get; set; }
+    List<replicas> rlist;
+    ReplicasDB rdb = new ReplicasDB();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var artistSession = await MySession.GetAsync<artist>("artistSession");
+        if (!artistSession.Success)
+        {
+            navigationManager.NavigateTo("login");
+        }
+
+        DrawingDB ddb = new DrawingDB();
+        rlist = (List<replicas>)(rdb.SelectAll($"SELECT * from replicas where drawingID = {id}"));
+        StateHasChanged();
+    }
+
+    async Task Delete(int id)
+    {
+        DrawingDB ddb = new DrawingDB();
+        ReplicasDB rdb = new ReplicasDB();
+        replicas r = rdb.GetRowByPKAsync(id).Result;
+
+        if (await js.InvokeAsync<bool>("confirm"))
+        {
+            rdb.Delete(r);
+            StateHasChanged();
+        }
+    }
+}

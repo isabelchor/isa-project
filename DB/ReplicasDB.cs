@@ -26,10 +26,9 @@ namespace DB
         protected override replicas CreateModel(object[] row)
         {
             replicas c = new replicas();
-            c.replicaID = int.Parse(row[0].ToString());
-            c.location = row[1].ToString();
+            c.replicaID = int.Parse(row[1].ToString());
+            c.location = row[0].ToString();
             c.drawingID =int.Parse(row[2].ToString());
-            c.artistID = int.Parse(row[3].ToString());
             
             return c;
 
@@ -46,7 +45,7 @@ namespace DB
             return replicasList;
 
         }
-        protected override async Task<replicas> GetRowByPKAsync(object pk)
+        public override async Task<replicas> GetRowByPKAsync(object pk)
         {
             string sql = @"SELECT replicas.* FROM replicas WHERE (replicaID = @id)";
             AddParameterToCommand("@id", int.Parse(pk.ToString()));
@@ -59,10 +58,9 @@ namespace DB
         protected override async Task<replicas> CreateModelAsync(object[] row)
         {
             replicas c = new replicas();
-            c.replicaID = int.Parse(row[0].ToString());
-            c.location = row[1].ToString();
+            c.replicaID = int.Parse(row[1].ToString());
+            c.location = row[0].ToString();
             c.drawingID = int.Parse(row[2].ToString());
-            c.artistID = int.Parse(row[3].ToString());
 
             return c;
 
@@ -85,5 +83,11 @@ namespace DB
             return "replicas";
         }
 
+        public void Delete(replicas re)
+        {
+            Dictionary<string, string> d = new Dictionary<string, string>(){
+                            { "replicaID", re.replicaID.ToString()} };
+            base.Delete(d);
+        }
     }
 }

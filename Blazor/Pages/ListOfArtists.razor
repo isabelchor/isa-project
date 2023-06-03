@@ -1,7 +1,10 @@
 ﻿@page "/"
+@inject IJSRuntime js
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage MySession
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
 @using ModelClass
 @using DB
-@inject IJSRuntime js
 
 <div class="m-2">
 <span class="h1">Artists</span>
@@ -39,9 +42,17 @@ else
 </div>
 
 @code {
-    List<artist> list;
-    protected override void OnInitialized()
+    List<artist> list; 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        var artistSession = await MySession.GetAsync<artist>("artistSession");
+        if (artistSession.Success)
+        {
+            navigationManager.NavigateTo($"/details/{((artist)(artistSession.Value)).artistID}");
+        }
+        else
+            navigationManager.NavigateTo("login");
+
         ArtisiDB ArtisiDB = new ArtisiDB();
         list = (List<artist>)ArtisiDB.SelectAll();
     }

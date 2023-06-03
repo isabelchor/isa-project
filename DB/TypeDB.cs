@@ -25,8 +25,7 @@ namespace DB
         }
         public override type GetRowByPK(object pk)
         {
-            string sql = @"SELECT type.* FROM type WHERE
-			 	(typeID = @id)";
+            string sql = $"SELECT type.* FROM type WHERE (ID = @id)";
             cmd.Parameters.AddWithValue("@id", int.Parse(pk.ToString()));
             List<type> list = (List<type>)SelectAll(sql);
             if (list.Count == 1)
@@ -34,10 +33,10 @@ namespace DB
             else
                 return null;
         }
-        protected override async Task<type> GetRowByPKAsync(object pk)
+        public override async Task<type> GetRowByPKAsync(object pk)
         {
             string sql = @"SELECT type.* FROM type WHERE
-			 	(typeID = @id)";
+			 	(ID = @id)";
             AddParameterToCommand("@id", int.Parse(pk.ToString()));
             List<type> list = (List<type>)await SelectAllAsync(sql);
             if (list.Count == 1)
