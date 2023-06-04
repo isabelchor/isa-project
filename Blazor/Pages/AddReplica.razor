@@ -1,0 +1,44 @@
+﻿@page "/addr/{Id:int}"
+@inject IJSRuntime js
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage MySession
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@using ModelClass
+@using DB
+
+<input type="text" @bind-value=@location placeholder="enter location"/>
+<button class="btn btn-danger" @onclick="@(() => Add(location))" >add</button>
+
+
+@code {
+    string location;
+    [Parameter] public int id { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var artistSession = await MySession.GetAsync<artist>("artistSession");
+        if (!artistSession.Success)
+        {
+            navigationManager.NavigateTo("login");
+        }
+    }
+    public async Task Add(string location)
+    {
+        replicas r = new replicas();
+        r.location = location;
+        r.drawingID = id;
+        ReplicasDB rdb = new ReplicasDB();
+
+        if (rdb.Insert(r))
+        {
+            
+            await js.InvokeVoidAsync("alert", $"Added Successfully!");
+            navigationManager.NavigateTo("/replicas/"+id);
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", $"Added failed!");
+            navigationManager.NavigateTo("/replicas/"+id);
+        }
+
+    }
+}

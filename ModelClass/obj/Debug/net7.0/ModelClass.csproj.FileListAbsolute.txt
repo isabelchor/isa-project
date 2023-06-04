@@ -22,3 +22,15 @@ C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass
 C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\refint\ModelClass.dll
 C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ModelClass.pdb
 C:\Users\qkwei\source\repos\MyProject-isa\ModelClass\obj\Debug\net7.0\ref\ModelClass.dll
+C:\Users\user\Source\Repos\isa-project\ModelClass\bin\Debug\net7.0\ModelClass.deps.json
+C:\Users\user\Source\Repos\isa-project\ModelClass\bin\Debug\net7.0\ModelClass.dll
+C:\Users\user\Source\Repos\isa-project\ModelClass\bin\Debug\net7.0\ModelClass.pdb
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ModelClass.csproj.AssemblyReference.cache
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ModelClass.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ModelClass.AssemblyInfoInputs.cache
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ModelClass.AssemblyInfo.cs
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ModelClass.csproj.CoreCompileInputs.cache
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ModelClass.dll
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\refint\ModelClass.dll
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ModelClass.pdb
+C:\Users\user\Source\Repos\isa-project\ModelClass\obj\Debug\net7.0\ref\ModelClass.dll

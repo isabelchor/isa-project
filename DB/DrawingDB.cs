@@ -98,15 +98,16 @@ namespace DB
                             
             base.Insert(d);
         }
-        public void Update(artist at)
+        public void Update(drawing at)
         {
             Dictionary<string, string> d = new Dictionary<string, string>(){
-                            {"artistID",at.artistID.ToString()},
-                            {"name",at.Name},
-                            {"birthday",at.Birthday} };
+                          {"namedrawing",at.namedrawing},
+                            {"date",at.date},
+                            {"cost",at.cost.ToString()},};
+
             Dictionary<string, string> d2 = new Dictionary<string, string>()
             {
-                {"artistID",at.artistID.ToString()} };
+                {"drawingID",at.drawingID.ToString()} };
 
             base.Update(d, d2);
         }

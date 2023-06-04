@@ -9,53 +9,57 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Blazor
 build_property.RootNamespace = Blazor
-build_property.ProjectDir = C:\Users\qkwei\source\repos\MyProject-isa\Blazor\
+build_property.ProjectDir = C:\Users\user\source\repos\isa-project\Blazor\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\qkwei\source\repos\MyProject-isa\Blazor
+build_property.MSBuildProjectDirectory = C:\Users\user\source\repos\isa-project\Blazor
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/App.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/MainLayout.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/ArtistDetails.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/AddReplica.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkUmVwbGljYS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/ArtistDetails.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXJ0aXN0RGV0YWlscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/EditPassword.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/EditPassword.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFBhc3N3b3JkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/ListOfArtists.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/ListOfArtists.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdE9mQXJ0aXN0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/ListReplicas.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/ListReplicas.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdFJlcGxpY2FzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/Login.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/Registresion.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/Registresion.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cmVzaW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/UpdateArtist.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/UpdateArtist.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBkYXRlQXJ0aXN0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/_Imports.razor]
+[C:/Users/user/Source/Repos/isa-project/Blazor/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/qkwei/source/repos/MyProject-isa/Blazor/Pages/_Host.cshtml]
+[C:/Users/user/Source/Repos/isa-project/Blazor/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

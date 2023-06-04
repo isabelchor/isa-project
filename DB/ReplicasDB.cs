@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DB
 {
-    public class ReplicasDB: BaseDB<replicas>
+    public class ReplicasDB : BaseDB<replicas>
     {
         protected override List<replicas> CreateListModel(List<object[]> rows)
         {
@@ -28,8 +28,8 @@ namespace DB
             replicas c = new replicas();
             c.replicaID = int.Parse(row[1].ToString());
             c.location = row[0].ToString();
-            c.drawingID =int.Parse(row[2].ToString());
-            
+            c.drawingID = int.Parse(row[2].ToString());
+
             return c;
 
         }
@@ -83,11 +83,33 @@ namespace DB
             return "replicas";
         }
 
-        public void Delete(replicas re)
+        public bool Delete(replicas re)
         {
             Dictionary<string, string> d = new Dictionary<string, string>(){
                             { "replicaID", re.replicaID.ToString()} };
-            base.Delete(d);
+            return base.Delete(d) != -1;
+        }
+        public bool Insert(replicas at)
+        {
+            Dictionary<string, string> d = new Dictionary<string, string>(){
+                  {"drawingID",at.drawingID.ToString()},
+                  { "replicaID", at.replicaID.ToString()},
+                            {"location",at.location} };
+
+            return base.Insert(d)!=-1;
+        }
+        public void Update(replicas at)
+        {
+            Dictionary<string, string> d = new Dictionary<string, string>(){
+                            {"drawingID",at.drawingID.ToString()},
+                             {"location",at.location} };
+
+            Dictionary<string, string> d2 = new Dictionary<string, string>(){
+                     { "replicaID",at.replicaID.ToString()} };
+
+            base.Update(d, d2);
         }
     }
+
 }
+

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OOaZHXU211TrenmvrptocB+fB+pxrobhPcv/RYdGeiA=",
+  "Hash": "RsnsDgNPM0Np361O6l1R8aT2Tx7VEN3R5jpTwB+JLRA=",
   "Source": "Blazor",
   "BasePath": "_content/Blazor",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Blazor\\wwwroot",
       "Source": "Blazor",
-      "ContentRoot": "C:\\Users\\qkwei\\source\\repos\\MyProject-isa\\Blazor\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\Source\\Repos\\isa-project\\Blazor\\wwwroot\\",
       "BasePath": "_content/Blazor",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\qkwei\\source\\repos\\MyProject-isa\\Blazor\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\user\\Source\\Repos\\isa-project\\Blazor\\wwwroot\\css\\site.css",
       "SourceId": "Blazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\qkwei\\source\\repos\\MyProject-isa\\Blazor\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\Source\\Repos\\isa-project\\Blazor\\wwwroot\\",
       "BasePath": "_content/Blazor",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\qkwei\\source\\repos\\MyProject-isa\\Blazor\\wwwroot\\dFGHJKL.png",
+      "Identity": "C:\\Users\\user\\Source\\Repos\\isa-project\\Blazor\\wwwroot\\dFGHJKL.png",
       "SourceId": "Blazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\qkwei\\source\\repos\\MyProject-isa\\Blazor\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\Source\\Repos\\isa-project\\Blazor\\wwwroot\\",
       "BasePath": "_content/Blazor",
       "RelativePath": "dFGHJKL.png",
       "AssetKind": "All",

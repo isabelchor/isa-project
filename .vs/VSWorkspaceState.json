@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Blazor",
-    "\\Blazor\\Pages",
-    "\\DB",
-    "\\ModelClass",
-    "\\project-isa"
+    ""
   ],
-  "SelectedNode": "\\Blazor\\Pages\\ArtistDetails.razor",
+  "SelectedNode": "\\project-isa.sln",
   "PreviewInSolutionExplorer": false
 }
