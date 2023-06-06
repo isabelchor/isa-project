@@ -33,7 +33,10 @@
         var artistSession = await MySession.GetAsync<artist>("artistSession");
         if (artistSession.Success)
         {
-            navigationManager.NavigateTo($"/details/{((artist)(artistSession.Value)).artistID}");
+            if ((artistSession.Value.Name == "admin"))
+                navigationManager.NavigateTo($"/");
+            else
+                navigationManager.NavigateTo($"/details/{((artist)(artistSession.Value)).artistID}");
         }
         else
             navigationManager.NavigateTo("login");

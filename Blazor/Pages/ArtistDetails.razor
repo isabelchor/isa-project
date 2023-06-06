@@ -5,16 +5,17 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
 @using ModelClass
 @using DB
+
 @if (dlist != null)
 {
-    <table class="table w-50">
+    <table >
         <thead>
-            <tr>
-                <th>Drawing Name</th>
-                <th>Date Published</th>
-                <th>Technique</th>
-                <th>Cost</th>
-                <th>Type</th>
+            <tr style="background-color:darkolivegreen">
+                <th >Drawing Name</th>
+                <th >Date Published</th>
+                <th >Technique</th>
+                <th >Cost</th>
+                <th >Type</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,7 @@
                     <td>
                         <a class ="" href="/replicas/@item.drawingID">@item.namedrawing</a>
                     </td>
-                    <td>@item.date</td>
+                    <td >@item.date</td>
                     <td>@item.technique</td>
                     <td>@item.cost</td>
                     <td>@tdb.GetRowByPKAsync(item.TypeID).Result.types</td>

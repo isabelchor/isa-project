@@ -163,3 +163,4 @@ C:\Users\user\Source\Repos\isa-project\Blazor\obj\Debug\net7.0\refint\Blazor.dll
 C:\Users\user\Source\Repos\isa-project\Blazor\obj\Debug\net7.0\Blazor.pdb
 C:\Users\user\Source\Repos\isa-project\Blazor\obj\Debug\net7.0\Blazor.genruntimeconfig.cache
 C:\Users\user\Source\Repos\isa-project\Blazor\obj\Debug\net7.0\ref\Blazor.dll
+C:\Users\qkwei\source\repos\MyProject-isa\Blazor\bin\Debug\net7.0\libman.json

@@ -26,3 +26,17 @@
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+table {
+    border: groove;
+    border-color: black;
+    
+
+}
+
+thead {
+    color: palegreen;
+    background-color:darkolivegreen;
+
+}
+

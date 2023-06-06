@@ -7,54 +7,56 @@
 @using DB
 
 <div class="m-2">
-<span class="h1">Artists</span>
-
-
-@if (list == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table style="border-style:dotted">
-        <thead>
-            <tr class="table-warning">
-                <th scope ="col">Artist Name</th>
-                <th scope="col">Artist birthday</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (artist item in list)
-            {
+    <span class="h1">Artists</span>
+    @if (list == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <table >
+            <thead >
                 <tr>
-                    <td><a class="" href="customerDetails/@item.artistID.ToString()"> @item.Name</a></td>
-                    <td>@item.Birthday</td>
-                    <td>
-                        <a class="btn btn-success" href="artistEdit/@item.artistID.ToString()">Edit</a>
-                        <button class="btn btn-danger" @onclick="@(() => Delete(@item.artistID))">Delete</button>
-                    </td>
+                    <th scope="col">Artist Name</th>
+                    <th scope="col">Artist birthday</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-   
-}
+            </thead>
+            <tbody>
+                @foreach (artist item in list)
+                {
+                    <tr>
+                        <td><a class="" href="details/@item.artistID.ToString()"> @item.Name</a></td>
+                        <td>@item.Birthday</td>
+                        <td>
+                            <a class="btn btn-success" href="artistEdit/@item.artistID.ToString()">Edit</a>
+                            <button class="btn btn-danger" @onclick="@(() => Delete(@item.artistID))">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
 
+
 @code {
-    List<artist> list; 
+    List<artist> list;
+    artist a;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         var artistSession = await MySession.GetAsync<artist>("artistSession");
         if (artistSession.Success)
         {
-            navigationManager.NavigateTo($"/details/{((artist)(artistSession.Value)).artistID}");
+            a = artistSession.Value;
+            if ((artistSession.Value.Name != "admin"))
+                navigationManager.NavigateTo($"/details/{((artist)(artistSession.Value)).artistID}");
         }
         else
             navigationManager.NavigateTo("login");
 
         ArtisiDB ArtisiDB = new ArtisiDB();
         list = (List<artist>)ArtisiDB.SelectAll();
+        StateHasChanged();
     }
     async Task Delete(int id)
     {

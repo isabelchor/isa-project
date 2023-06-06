@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Blazor",
+    "\\Blazor\\Pages",
+    "\\DB",
+    "\\ModelClass",
+    "\\project-isa"
   ],
-  "SelectedNode": "\\project-isa.sln",
+  "SelectedNode": "\\Blazor\\Pages\\AddReplica.razor",
   "PreviewInSolutionExplorer": false
 }
