@@ -1,0 +1,43 @@
+﻿@page "/editreplica/{Id:int}"
+@inject IJSRuntime js
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage MySession
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+@using ModelClass
+@using DB
+
+<input type="text" @bind-value=@location placeholder="enter location" />
+<button class="btn btn-danger" @onclick="@(() => Edit(location))">Edit</button>
+
+@code {
+    string location;
+    [Parameter] public int id { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var artistSession = await MySession.GetAsync<artist>("artistSession");
+        if (!artistSession.Success)
+        {
+            navigationManager.NavigateTo("login");
+        }
+    }
+    public async Task Edit(string location)
+    {
+        replicas r = new replicas();
+        r.location = location;
+        r.replicaID = id;
+        ReplicasDB rdb = new ReplicasDB();
+
+        if (rdb.Update(r))
+        {
+
+            await js.InvokeVoidAsync("alert", $"Edited Successfully!");
+            navigationManager.NavigateTo("/replicas/" + id);
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", $"Edit failed!");
+            navigationManager.NavigateTo("/replicas/" + id);
+        }
+
+    }
+}

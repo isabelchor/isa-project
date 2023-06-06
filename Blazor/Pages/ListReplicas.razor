@@ -20,11 +20,14 @@
                     <td>@item.location</td>
                     <td>
                         <button class="btn btn-danger" @onclick="@(() => Delete(@item.replicaID))">Delete</button>
+                        <a href="/editreplica/@item.replicaID">Edit</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <a href="/addr/@id">add replica</a>
+
 }
 else
 {

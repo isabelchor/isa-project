@@ -98,16 +98,15 @@ namespace DB
 
             return base.Insert(d)!=-1;
         }
-        public void Update(replicas at)
+        public bool Update(replicas at)
         {
             Dictionary<string, string> d = new Dictionary<string, string>(){
-                            {"drawingID",at.drawingID.ToString()},
                              {"location",at.location} };
 
             Dictionary<string, string> d2 = new Dictionary<string, string>(){
                      { "replicaID",at.replicaID.ToString()} };
 
-            base.Update(d, d2);
+            return base.Update(d, d2) != -1;
         }
     }
 
